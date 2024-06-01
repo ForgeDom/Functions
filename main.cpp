@@ -2,30 +2,18 @@
 #include <ctime>
 using namespace std;
 
-bool Check(int a) {
-	if (a < 0) {
-		return false;
-	}
-	else if (a > 0) {
-		return true;
-	}
-	else {
-		return false;
-	}
+int Check(int a, int b) {
+    int c = 1;
+    for (int i = 0; i < b; i++) {
+        c *= a;
+    }
+    return c;
 }
-int main()
-{
-	int a;
-	cin >> a;
 
-	bool res = Check(a);
-
-	if (res) {
-		cout << a << " is positive." << endl;
-	}
-	else {
-		cout << a << " is zero or negative." << endl;
-	}
-
-	return 0;
+int main() {
+    int a, b;
+    cin >> a >> b;
+    int res = Check(a, b);
+    cout << res;
+    return 0;
 }
