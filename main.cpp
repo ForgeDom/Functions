@@ -1,47 +1,54 @@
-#include <iostream>
-
+﻿#include <iostream>
+#include <string>
 using namespace std;
 
-bool isPerfect(int number) {
-    int sum = 1; 
-    for (int i = 2; i <= number / 2; ++i) {
-        if (number % i == 0) {
-            sum += i;
-        }
+const char topLeft = 0xC9;   // ┌
+const char topRight = 0xBB;  // ┐
+const char bottomLeft = 0xC8; // └
+const char bottomRight = 0xBC; // ┘
+const char horizontal = 0xCD; // ─
+const char vertical = 0xBA;   // │
+
+const char spades = 6; // ♠
+const char hearts = 3; // ♥
+const char diamonds = 4; // ♦
+const char clubs = 5; // ♣
+
+void printCard(const string& rank, char suitSymbol) {
+    cout << topLeft << string(9, horizontal) << topRight << endl;
+
+    cout << vertical << " " << rank;
+    if (rank == "10") {
+        cout << string(6, ' ') << vertical << endl; 
+    }
+    else {
+        cout << string(7, ' ') << vertical << endl;
     }
 
-    return sum == number;
-}
+    cout << vertical << string(9, ' ') << vertical << endl;
+    cout << vertical << string(9, ' ') << vertical << endl;
 
-int findPerfectNumbersInRange(int start, int end, int perfectNumbers[], int maxSize) {
-    int count = 0;
+    cout << vertical << "    " << suitSymbol << "    " << vertical << endl;
 
-    for (int i = start; i <= end && count < maxSize; ++i) {
-        if (isPerfect(i)) {
-            perfectNumbers[count++] = i;
-        }
+    cout << vertical << string(9, ' ') << vertical << endl;
+    cout << vertical << string(9, ' ') << vertical << endl;
+
+    cout << vertical << "      " << rank;
+    if (rank == "10") {
+        cout << " " << vertical << endl; 
+    }
+    else {
+        cout << "  " << vertical << endl;
     }
 
-    return count; 
+    cout << bottomLeft << string(9, horizontal) << bottomRight << endl;
 }
 
 int main() {
-    int start, end;
-    const int maxPerfectNumbers = 10; 
-    int perfectNumbers[maxPerfectNumbers];
-
-    cout << "Enter beginning of the interval: ";
-    cin >> start;
-    cout << "Enter end of the interval: ";
-    cin >> end;
-
-    int count = findPerfectNumbersInRange(start, end, perfectNumbers, maxPerfectNumbers);
-
-    cout << "Perfect number are from " << start << " to " << end << ": ";
-    for (int i = 0; i < count; ++i) {
-        cout << perfectNumbers[i] << " ";
-    }
-    cout << endl;
+    printCard("A", spades);   
+    printCard("10", hearts);  
+    printCard("J", diamonds); 
+    printCard("K", clubs);    
 
     return 0;
 }
